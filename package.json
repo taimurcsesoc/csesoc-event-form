@@ -1,0 +1,20 @@
+{
+  "name": "event-form",
+  "version": "1.0.0",
+  "description": "event form front/back end for UNSW CSEsoc",
+  "main": "server.js",
+  "scripts": {
+  	"start": "node server.js",
+  	"server": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Raiyan Zubair",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^3.5.1",
+    "express": "^4.16.2"
+  },
+  "devDependenies": {
+  	"nodemon": "^1.14.12"
+  }
+}
