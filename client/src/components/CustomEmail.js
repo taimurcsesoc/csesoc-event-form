@@ -1,33 +1,34 @@
 import React from 'react'
-import { Box, Email, Image, Item, Span, A } from 'react-html-email'
+import { Box, Email, Image, Item, Span, A, renderEmail } from 'react-html-email'
 import logo from '../static/csesocwhiteblue.png'
 
-const css = `
-@media only screen and (max-device-width: 480px) {
-  font-size: 20px !important;
-}`.trim()
-
-const sourceURL = 'https://raw.githubusercontent.com/chromakode/react-html-email/master/examples/kitchenSink.js'
-
-export default class CustomEmail extends React.Component {
-	
-	render() {
-		const {title, subject} = this.props
-		return(
-		  <Email title={title} headCSS={css}>
-		    <Item>
-		      <Span fontSize={15}>REQUEST: {subject}</Span>
-		    </Item>
-		    <Item>
-		      <Box cellSpacing={20} width="100%" style={{ borderTop: '3px solid black' }}>
-		        <Item>
-		          <Image data-mc-bar="bar" data-mc-baz="baz" alt="react" src={logo} width={100} height={100} />
-		          <A download={sourceURL} href={sourceURL}>Source code</A>
-		        </Item>
-		      </Box>
-		    </Item>
-		  </Email>
-  	)
-	}
-
+export default (props) => {
+	return (
+	  <Email title={props.title}>
+	    <Item  style={{padding: '10px'}}>
+	    <h3>New event request from {props.organiser} for : {props.eventName}</h3>
+	    <h2>EVENT DETAILS</h2>
+	      <Box cellSpacing={20} width="100%" style={{ borderTop: '3px solid black' }}>
+	        <Item>
+  					<Item>Event name: {props.eventName}</Item>
+	        	<Item>Event description: {props.description}</Item>
+	        	<Item>Organiser: {props.organiser}</Item>
+	        	<Item>Email: {props.organiserEmail}</Item >
+	        	<Item>Portfolio: {props.portfolio}</Item>
+	        	<Item>Date: {props.date}</Item>
+	        	<Item>Start time: {props.start}</Item>
+	        	<Item>End time: {props.end}</Item>
+	        	<Item>Event location: {props.location}</Item>
+	        	{props.attendance && <Item>Estimated attendance: {props.attendance}</Item>}
+	        	{props.links && <Item>Ticketing/marketing links: {props.location}</Item>}
+	        	{props.pricing && <Item>Pricing details for members: {props.pricing}</Item>}
+	        	{props.equipment && <Item>Equipment needed: {props.equipment}</Item>}
+	        	{props.shoppingList && <Item>Add these to the shopping list this week: {props.shoppingList}</Item>}
+	        	<Item>Notes: {props.notes}</Item>
+	        	<Item>{props.message}</Item>
+	        </Item>
+	      </Box>
+	    </Item>
+	  </Email>
+	)
 } 

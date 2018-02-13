@@ -15,19 +15,8 @@ class App extends Component {
         </Layout.Header>
         <Layout.Content style={{padding: "20px"}}> 
           <Row>
-            <Col offset={8} span={8}>
+            <Col offset={4} span={16}>
               <MainForm/>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <CustomEmail
-                title="HELLO THERE"
-                recipient="bla bla bla"
-                organiser="me"
-                subject="event name"
-                portfolio="portfolio"
-              />
             </Col>
           </Row>
         </Layout.Content>

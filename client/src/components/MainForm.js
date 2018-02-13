@@ -2,7 +2,7 @@ import React from 'react'
 import { Input, Button, Select, Checkbox, Form, Row, Col, Modal } from 'antd'
 import { withFormik }  from 'formik'
 import Yup from 'yup'
-import { sendEmailMarketing, sendEmailSecretary, sendEmailArcDelegate, sendEmailTreasurer } from './EmailFunctions'
+import { sendEmailMarketing, sendEmailSecretary, sendEmailArcDelegate, sendEmailTreasurer, sendEmailSocials, sendEmailOrganiser } from '../EmailFunctions'
 import '../styles/MainForm.css'
 
 const { Option } = Select
@@ -28,6 +28,11 @@ const MainForm = (props) => {
 				<h3>Organiser</h3>
 				<Input type="text" name="organiser" value={values.organiser} onChange={handleChange}/>
 				{touched.organiser && errors.organiser && <div className="error-text">{errors.organiser}</div>}
+			</div>	
+			<div className="form-input">
+				<h3>Organiser Email</h3>
+				<Input type="email" name="organiserEmail" value={values.organiserEmail} onChange={handleChange}/>
+				{touched.organiserEmail && errors.organiserEmail && <div className="error-text">{errors.organiserEmail}</div>}
 			</div>				
 			<div className="form-input">
 				<h3>Portfolio</h3>
@@ -35,7 +40,6 @@ const MainForm = (props) => {
 					<Option value="socials">Socials</Option>
 					<Option value="careers">Careers</Option>
 					<Option value="education">Education</Option>
-					<Option value="marketing">Marketing</Option>
 				</Select>
 				{touched.portfolio && errors.portfolio && <div className="error-text">{errors.portfolio}</div>}
 			</div>
@@ -77,10 +81,6 @@ const MainForm = (props) => {
 				<Input type="text" name="pricing" value={values.pricing} onChange={handleChange}/>
 			</div>
 			<div className="form-input">
-				<h3>Soc Announce</h3>
-				<Checkbox name="socAnnounce" checked={values.socAnnounce} onChange={() => setFieldValue('socAnnounce', !values.socAnnounce)}/>
-			</div>
-			<div className="form-input">
 				<h3>Required Equipment</h3>
 				<Input.TextArea rows="4" name="equipment" value={values.equipment} onChange={handleChange}/>
 			</div>
@@ -90,19 +90,19 @@ const MainForm = (props) => {
 			</div>
 			<div className="form-input">
 				<h3>Notes for Marketing Director</h3>
-				<Input.TextArea rows="4" name="marketingNotes" value={values.marketingNotes} onChange={handleChange}/>
+				<Input.TextArea rows="4" name="notesMarketing" value={values.notesMarketing} onChange={handleChange}/>
 			</div>
 			<div className="form-input">
 				<h3>Notes for Arc Delegate</h3>
-				<Input.TextArea rows="4" name="arcDelegateNotes" value={values.arcDelegateNotes} onChange={handleChange}/>
+				<Input.TextArea rows="4" name="notesArcDelegate" value={values.notesArcDelegate} onChange={handleChange}/>
 			</div>
 			<div className="form-input">
 				<h3>Notes for Treasurer</h3>
-				<Input.TextArea rows="4" name="treasurerNotes" value={values.treasurerNotes} onChange={handleChange}/>
+				<Input.TextArea rows="4" name="notesTreasurer" value={values.notesTreasurer} onChange={handleChange}/>
 			</div>
 			<div className="form-input">
 				<h3>Notes for Secretary</h3>
-				<Input.TextArea rows="4" name="secretaryNotes" value={values.secretaryNotes} onChange={handleChange}/>
+				<Input.TextArea rows="4" name="notesSecretary" value={values.notesSecretary} onChange={handleChange}/>
 			</div>
 			<div className="form-input">
        	<Button type="primary" htmlType="submit">Submit</Button>
@@ -116,6 +116,7 @@ export default withFormik({
 		return {
 			eventName: '',
 			organiser: '',
+			organiserEmail: '',
 			portfolio: '',
 			description: '',
 			date: '',
@@ -125,18 +126,18 @@ export default withFormik({
 			attendance: '',
 			links: '',
 			pricing: '',
-			socAnnounce: false,
 			equipment: '',
 			shoppingList: '',
-			marketingNotes: '',
-			arcDelegateNotes: '',
-			treasurerNotes: '',
-			secretaryNotes: '',
+			notesMarketing: '',
+			notesArcDelegate: '',
+			notesTreasurer: '',
+			notesSecretary: '',
 		}
 	},
 	validationSchema: Yup.object().shape({
 		eventName: Yup.string().required('Event name required'),
 		organiser: Yup.string().required('Event organiser required'),
+		organiserEmail: Yup.string().email().required('Email required'),
 		portfolio: Yup.string().required('Portfolio required'),
 		description: Yup.string().required('Event description required'),
 		date: Yup.date().required('Event date required'),
@@ -145,6 +146,22 @@ export default withFormik({
 		location: Yup.string().required('Event location required'),
 	}),
 	handleSubmit(values) {
-		sendEmailMarketing()
+		let cc = ''
+
+		if (values.portfolio === 'education') {
+			cc = `marketing@csesoc.org.au`
+		} else {
+			cc = `${values.portfolio}.marketing@csesoc.org.au`
+		}
+		const finalDetails = Object.assign({}, values, {cc: cc})
+		console.log(sendEmailOrganiser(finalDetails))
+		console.log(sendEmailMarketing(finalDetails))
+		console.log(sendEmailArcDelegate(finalDetails))
+		console.log(sendEmailSecretary(finalDetails))
+		console.log(sendEmailTreasurer(finalDetails))
+		if (values.portfolio === "socials") {
+			console.log(sendEmailSocials(finalDetails))
+		}
+
 	}
 })(MainForm)
