@@ -1,8 +1,15 @@
 import React from 'react'
-import { Input, Button, Select, Checkbox, Form, Row, Col, Modal } from 'antd'
+import { Input, Button, Select } from 'antd'
 import { withFormik }  from 'formik'
 import Yup from 'yup'
-import { sendEmailMarketing, sendEmailSecretary, sendEmailArcDelegate, sendEmailTreasurer, sendEmailSocials, sendEmailOrganiser } from '../EmailFunctions'
+import { 
+	constructEmailMarketing,
+	constructEmailSecretary, 
+	constructEmailArcDelegate, 
+	constructEmailTreasurer, 
+	constructEmailSocials, 
+	constructEmailOrganiser 
+} from '../functions/EmailFunctions'
 import '../styles/MainForm.css'
 
 const { Option } = Select
@@ -14,7 +21,7 @@ const MainForm = (props) => {
 		touched,
 		handleChange,
 		setFieldValue,
-		handleSubmit
+		handleSubmit,
 	} = props
 
 	return (
@@ -105,8 +112,8 @@ const MainForm = (props) => {
 				<Input.TextArea rows="4" name="notesSecretary" value={values.notesSecretary} onChange={handleChange}/>
 			</div>
 			<div className="form-input">
-       	<Button type="primary" htmlType="submit">Submit</Button>
-      </div>
+       			<Button type="primary" htmlType="submit">Submit</Button>
+      		</div>
 		</form>
 	)
 }
@@ -145,7 +152,7 @@ export default withFormik({
 		end: Yup.string().required('End time required'),
 		location: Yup.string().required('Event location required'),
 	}),
-	handleSubmit(values) {
+	handleSubmit(values, {resetForm}){
 		let cc = ''
 
 		if (values.portfolio === 'education') {
@@ -154,14 +161,24 @@ export default withFormik({
 			cc = `${values.portfolio}.marketing@csesoc.org.au`
 		}
 		const finalDetails = Object.assign({}, values, {cc: cc})
-		console.log(sendEmailOrganiser(finalDetails))
-		console.log(sendEmailMarketing(finalDetails))
-		console.log(sendEmailArcDelegate(finalDetails))
-		console.log(sendEmailSecretary(finalDetails))
-		console.log(sendEmailTreasurer(finalDetails))
-		if (values.portfolio === "socials") {
-			console.log(sendEmailSocials(finalDetails))
-		}
-
+		
+		let emailData = []
+		emailData.push(constructEmailMarketing(finalDetails))
+		emailData.push(constructEmailSecretary(finalDetails)) 
+		emailData.push(constructEmailArcDelegate(finalDetails)) 
+		emailData.push(constructEmailTreasurer(finalDetails)) 
+		emailData.push(constructEmailSocials(finalDetails)) 
+		emailData.push(constructEmailOrganiser(finalDetails))
+		fetch('/api/send-emails', {
+			headers: {
+	      'Accept': 'application/json',
+	      'Content-Type': 'application/json'
+	    },
+			method: "POST",
+			body: JSON.stringify(emailData)
+		}).then(res => {
+			resetForm()
+			alert("Emails successfully sent")
+		})
 	}
 })(MainForm)

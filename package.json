@@ -4,17 +4,21 @@
   "description": "event form front/back end for UNSW CSEsoc",
   "main": "server.js",
   "scripts": {
-  	"start": "node server.js",
-  	"server": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
   "author": "Raiyan Zubair",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "concurrently": "^3.5.1",
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "nodemailer": "^4.4.2",
+    "react": "^16.2.0"
   },
   "devDependenies": {
-  	"nodemon": "^1.14.12"
+    "nodemon": "^1.14.12"
   }
 }

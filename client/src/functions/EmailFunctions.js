@@ -1,13 +1,12 @@
 import React from 'react'
 import { renderEmail } from 'react-html-email' 
-import CustomEmail from './components/CustomEmail' 
+import CustomEmail from '../components/CustomEmail' 
 
-export const sendEmailMarketing = (details) => {
+export const constructEmailMarketing = (details) => {
 	const recipient = details.cc
 	const htmlEmail = renderEmail(
 		<CustomEmail 
 			title={`MARKETING REQUEST: ${details.eventName}`}
-			subject={`MARKETING REQUEST: ${details.eventName}`}
 			eventName={details.eventName}
 			descrption={details.descrption}
 			organiser={details.organiser}
@@ -28,15 +27,20 @@ export const sendEmailMarketing = (details) => {
 				- Once room booking is confirmed, put the event up on Facebook`}
 		/>
 	)
-	return htmlEmail
+	const emailData = {
+		recipient: recipient,
+		cc: details.cc,
+		subject: `MARKETING REQUEST: ${details.eventName}`,
+		html: htmlEmail,
+	}
+	return emailData
 }
 
-export const sendEmailArcDelegate = (details) => {
-	const recipient = `arc.delegate@csesoc.org.au`
+export const constructEmailArcDelegate = (details) => {
+	const recipient = `cseoc.arcdelegate@cse.unsw.edu.au`
 	const htmlEmail = renderEmail(
 		<CustomEmail 
 			title={`ROOM BOOKING REQUEST: ${details.eventName}`}
-			subject={`ROOM BOOKING REQUEST: ${details.eventName}`}
 			eventName={details.eventName}
 			descrption={details.descrption}
 			organiser={details.organiser}
@@ -54,17 +58,21 @@ export const sendEmailArcDelegate = (details) => {
 				- Create a bark event at https://bark.csesoc.unsw.edu.au/admin/ and email the token to the organiser`}
 		/>
 	)
-	return htmlEmail
+	const emailData = {
+		recipient: recipient,
+		cc: details.cc,
+		subject: `ROOM BOOKING REQUEST: ${details.eventName}`,
+		html: htmlEmail,
+	}
+	return emailData
 }
 
-export const sendEmailSecretary = (details) => {
+export const constructEmailSecretary = (details) => {
 	const recipient = `secretary@csesoc.org.au`
 	const htmlEmail = renderEmail(
 		<CustomEmail 
 			title={`NEW EVENT FOR SOC ANNOUNCE: ${details.eventName}`}
 			recipient={``}
-			cc={``}
-			subject={`NEW EVENT FOR SOC ANNOUNCE: ${details.eventName}`}
 			eventName={details.eventName}
 			descrption={details.descrption}
 			organiser={details.organiser}
@@ -77,20 +85,25 @@ export const sendEmailSecretary = (details) => {
 			links={details.links}
 			notes={details.notesSecretary}
 			message={
-				`Make sure to confirm details with organising portfolio before sending Soc Announce! 
+				`Make sure to confirm details with organising portfolio before constructing Soc Announce! 
 				There is a chance the event details have changed. 
 				Also, you may ask marketing for their event description if necessary.`}
 		/>
 	)
-	return htmlEmail
+	const emailData = {
+		recipient: recipient,
+		cc: details.cc,
+		subject: `NEW EVENT FOR SOC ANNOUNCE: ${details.eventName}`,
+		html: htmlEmail,
+	}
+	return emailData
 }
 
-export const sendEmailTreasurer = (details) => {
+export const constructEmailTreasurer = (details) => {
 	const recipient = `treasurer@csesoc.org.au`
 	const htmlEmail = renderEmail(
 		<CustomEmail 
 			title={`NEW EVENT: ${details.eventName}`}
-			subject={`NEW EVENT: ${details.eventName}`}
 			eventName={details.eventName}
 			descrption={details.descrption}
 			organiser={details.organiser}
@@ -105,15 +118,20 @@ export const sendEmailTreasurer = (details) => {
 			notes={details.notesTreasurer}
 		/>
 	)
-	return htmlEmail
+	const emailData = {
+		recipient: recipient,
+		cc: details.cc,
+		subject: `NEW EVENT: ${details.eventName}`,
+		html: htmlEmail,
+	}
+	return emailData
 }
 
-export const sendEmailSocials = (details) => {
+export const constructEmailSocials = (details) => {
 	const recipient = `social.events@csesoc.org.au`
 	const htmlEmail = renderEmail(
 		<CustomEmail 
 			title={`SHOPPING LIST FOR: ${details.eventName}`}
-			subject={`SHOPPING LIST FOR: ${details.eventName}`}
 			eventName={details.eventName}
 			descrption={details.descrption}
 			organiser={details.organiser}
@@ -128,15 +146,20 @@ export const sendEmailSocials = (details) => {
 			message={`If you cannot get certain items, please let the event organiser know ASAP!`}
 		/>
 	)
-	return htmlEmail
+	const emailData = {
+		recipient: recipient,
+		cc: details.cc,
+		subject: `SHOPPING LIST FOR: ${details.eventName}`,
+		html: htmlEmail,
+	}
+	return emailData
 }
 
-export const sendEmailOrganiser = (details) => {
+export const constructEmailOrganiser = (details) => {
 	const recipient = details.organiserEmail
 	const htmlEmail = renderEmail(
 		<CustomEmail 
 			title={`NEW EVENT: ${details.eventName}`}
-			subject={`NEW EVENT: ${details.eventName}`}
 			eventName={details.eventName}
 			descrption={details.descrption}
 			organiser={details.organiser}
@@ -153,5 +176,11 @@ export const sendEmailOrganiser = (details) => {
 			shoppingList={details.shoppingList}
 		/>
 	)
-	return htmlEmail
+	const emailData = {
+		recipient: recipient,
+		cc: details.cc,
+		subject: `NEW EVENT: ${details.eventName}`,
+		html: htmlEmail,
+	}
+	return emailData
 }

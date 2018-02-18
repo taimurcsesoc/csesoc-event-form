@@ -1,6 +1,6 @@
 import React from 'react'
-import { Box, Email, Image, Item, Span, A, renderEmail } from 'react-html-email'
-import logo from '../static/csesocwhiteblue.png'
+import { Box, Email, Item} from 'react-html-email'
+// import logo from '../static/csesocwhiteblue.png'
 
 export default (props) => {
 	return (
@@ -13,10 +13,10 @@ export default (props) => {
   					<Item>Event name: {props.eventName}</Item>
 	        	<Item>Event description: {props.description}</Item>
 	        	<Item>Organiser: {props.organiser}</Item>
-	        	<Item>Email: {props.organiserEmail}</Item >
+	        	<Item>Email: {props.organiserEmail}</Item>
 	        	<Item>Portfolio: {props.portfolio}</Item>
 	        	<Item>Date: {props.date}</Item>
-	        	<Item>Start time: {props.start}</Item>
+	        	<Item>Start time (24 hr): {props.start}</Item>
 	        	<Item>End time: {props.end}</Item>
 	        	<Item>Event location: {props.location}</Item>
 	        	{props.attendance && <Item>Estimated attendance: {props.attendance}</Item>}
@@ -25,7 +25,7 @@ export default (props) => {
 	        	{props.equipment && <Item>Equipment needed: {props.equipment}</Item>}
 	        	{props.shoppingList && <Item>Add these to the shopping list this week: {props.shoppingList}</Item>}
 	        	<Item>Notes: {props.notes}</Item>
-	        	<Item>{props.message}</Item>
+	        	<Item>{`${props.message}`}</Item>
 	        </Item>
 	      </Box>
 	    </Item>

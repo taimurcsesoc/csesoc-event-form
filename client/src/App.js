@@ -1,17 +1,16 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Layout, Row, Col } from 'antd'
 import logo from './static/csesocwhiteblue.png'
 import MainForm from './components/MainForm'
-import CustomEmail  from './components/CustomEmail'
 
 import './styles/App.css'
 
-class App extends Component {
+class App extends React.Component {
   render() {
     return (
       <Layout>
         <Layout.Header>
-          <img src={logo}/>
+          <img alt="CSESoc logo" src={logo}/>
         </Layout.Header>
         <Layout.Content style={{padding: "20px"}}> 
           <Row>
