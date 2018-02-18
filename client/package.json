@@ -12,7 +12,7 @@
     "yup": "^0.24.0"
   },
   "devDependencies": {
-    "react-scripts": "1.1.1"
+    "react-scripts": "4.6.1"
   },
   "scripts": {
     "start": "react-scripts start",
