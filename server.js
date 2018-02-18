@@ -1,14 +1,19 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
 const nodemailer = require('nodemailer');
 
 
 const port = 3001;
 const app = express();
 app.use(bodyParser.json());
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'client/build')));
 
-app.get('/users', (req, res) => {
-	res.json([{id: 0, name: "poopy"}, {id: 1, name: "melon"}]);
+
+//catch-all that sends back the react app's index.html 
+app.get('*', (req, res) => {
+	res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 
 app.post('/api/send-emails/', (req, res) => {

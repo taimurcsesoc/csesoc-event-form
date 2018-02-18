@@ -18,7 +18,7 @@
     "nodemailer": "^4.4.2",
     "react": "^16.2.0"
   },
-  "devDependenies": {
-    "nodemon": "^1.14.12"
+  "engines": {
+    "node": "8.6.0"
   }
 }

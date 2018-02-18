@@ -11,6 +11,9 @@
     "react-scripts": "1.1.0",
     "yup": "^0.24.0"
   },
+  "devDependencies": {
+    "react-scripts": "1.1.1"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
