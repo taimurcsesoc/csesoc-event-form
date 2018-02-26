@@ -13,6 +13,7 @@ app.use(express.static(path.join(__dirname, '/client/build')));
 
 //catch-all that sends back the react app's index.html 
 app.get('*', (req, res) => {
+	console.log(__dirname + '/client/build/index.html');
 	res.sendFile(path.join(__dirname, '/client/build/index.html'));
 });
 
