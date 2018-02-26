@@ -3,8 +3,6 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const nodemailer = require('nodemailer');
 
-
-const port = 3001;
 const app = express();
 app.use(bodyParser.json());
 // Serve static files from the React app
@@ -25,7 +23,6 @@ app.post('/api/send-emails/', (req, res) => {
 		},
 	});
 
-	console.log(req.body)
 	req.body.forEach(element => {
 		let mailOptions = {
 			from: 'CSESoc Events <events.form@csesoc.org.au>',
@@ -44,5 +41,3 @@ app.post('/api/send-emails/', (req, res) => {
 	})
 	res.send("emails sent successfully");
 });
-
-app.listen(port, () => console.log(`server started on port ${port}`));
