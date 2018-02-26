@@ -7,15 +7,16 @@ const nodemailer = require('nodemailer');
 const port = process.env.port || 5000;
 const app = express();
 app.use(bodyParser.json());
+
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, '/client/build')));
+app.use(express.static('client/build'));
 
 
 //catch-all that sends back the react app's index.html 
-app.get('*', (req, res) => {
-	console.log(__dirname + '/client/build/index.html');
-	res.sendFile(path.join(__dirname, '/client/build/index.html'));
-});
+// app.get('*', (req, res) => {
+// 	console.log(__dirname + '/client/build/index.html');
+// 	res.sendFile(path.join(__dirname, '/client/build/index.html'));
+// });
 
 app.post('/api/send-emails/', (req, res) => {
 	let transporter  = nodemailer.createTransport({
