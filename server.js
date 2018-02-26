@@ -8,7 +8,7 @@ const port = 3001;
 const app = express();
 app.use(bodyParser.json());
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, '/client/build')));
 
 
 //catch-all that sends back the react app's index.html 
