@@ -1,4 +1,4 @@
-  {
+{
   "name": "event-form",
   "version": "0.1.0",
   "private": true,
@@ -7,12 +7,8 @@
     "formik": "^0.10.5",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-html-email": "^3.0.0",
     "react-scripts": "1.1.0",
     "yup": "^0.24.0"
-  },
-  "devDependencies": {
-    "react-scripts": "4.6.1"
   },
   "scripts": {
     "start": "react-scripts start",

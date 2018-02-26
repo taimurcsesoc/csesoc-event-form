@@ -1,6 +1,5 @@
 import React from 'react'
-import { Box, Email, Item} from 'react-html-email'
-// import logo from '../static/csesocwhiteblue.png'
+import { Box, Email, Item} from '../react-html-email'
 
 export default (props) => {
 	return (

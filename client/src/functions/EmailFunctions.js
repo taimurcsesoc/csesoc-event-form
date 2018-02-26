@@ -1,5 +1,5 @@
 import React from 'react'
-import { renderEmail } from 'react-html-email' 
+import { renderEmail } from '../react-html-email' 
 import CustomEmail from '../components/CustomEmail' 
 
 export const constructEmailMarketing = (details) => {
