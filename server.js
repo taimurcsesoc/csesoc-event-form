@@ -4,7 +4,7 @@ const path = require('path');
 const nodemailer = require('nodemailer');
 
 
-const port = 3001;
+const port = process.env.port || 5000;
 const app = express();
 app.use(bodyParser.json());
 // Serve static files from the React app
